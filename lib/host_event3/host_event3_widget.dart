@@ -341,63 +341,70 @@ class _HostEvent3WidgetState extends State<HostEvent3Widget> {
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 25),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              FlutterFlowTheme.primaryColor,
-                              Color(0xFF844DFF)
-                            ],
-                            stops: [0, 1],
-                            begin: AlignmentDirectional(1, -0.94),
-                            end: AlignmentDirectional(-1, 0.94),
+                    Visibility(
+                      visible: (functions.showSwitch(
+                              switchListTile1Value, switchListTile2Value)) ==
+                          (true),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 25),
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                FlutterFlowTheme.primaryColor,
+                                Color(0xFF844DFF)
+                              ],
+                              stops: [0, 1],
+                              begin: AlignmentDirectional(1, -0.94),
+                              end: AlignmentDirectional(-1, 0.94),
+                            ),
+                            borderRadius: BorderRadius.circular(50),
                           ),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            setState(() => _loadingButton1 = true);
-                            try {
-                              if (switchListTile1Value) {
-                                final eventsUpdateData = createEventsRecordData(
-                                  isFree: true,
-                                );
-                                await widget.refEvent.update(eventsUpdateData);
-                              }
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      HostEventInvitationsWidget(
-                                    refEvent: widget.refEvent,
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              setState(() => _loadingButton1 = true);
+                              try {
+                                if (switchListTile1Value) {
+                                  final eventsUpdateData =
+                                      createEventsRecordData(
+                                    isFree: true,
+                                  );
+                                  await widget.refEvent
+                                      .update(eventsUpdateData);
+                                }
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        HostEventInvitationsWidget(
+                                      refEvent: widget.refEvent,
+                                    ),
                                   ),
-                                ),
-                              );
-                            } finally {
-                              setState(() => _loadingButton1 = false);
-                            }
-                          },
-                          text: 'Create Free event',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 40,
-                            color: Color(0x003A2EE8),
-                            textStyle: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Nunito',
-                              color: Colors.white,
-                              fontSize: 18,
+                                );
+                              } finally {
+                                setState(() => _loadingButton1 = false);
+                              }
+                            },
+                            text: 'Create Free event',
+                            options: FFButtonOptions(
+                              width: double.infinity,
+                              height: 40,
+                              color: Color(0x003A2EE8),
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Nunito',
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
                             ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: 12,
+                            loading: _loadingButton1,
                           ),
-                          loading: _loadingButton1,
                         ),
                       ),
                     ),
