@@ -8,6 +8,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../host_event2/host_event2_widget.dart';
 import '../main.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -735,6 +736,12 @@ class _HostEventWidgetState extends State<HostEventWidget> {
                                     privacyType: 'Public',
                                     guestCount: 0,
                                     ownerName: hostEventUsersRecord.displayName,
+                                    isPlus21: false,
+                                    isFree: false,
+                                    isPayed: false,
+                                    price: 0.0,
+                                    grantedTickets: 0,
+                                    eventCode: functions.formatEventCode(),
                                   );
                                   await EventsRecord.collection
                                       .doc()

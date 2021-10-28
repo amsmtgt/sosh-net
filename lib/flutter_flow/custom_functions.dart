@@ -170,3 +170,15 @@ bool showRecordUser(
     return false;
   }
 }
+
+bool showSwitch(
+  bool isFree,
+  bool isPay,
+) {
+  // Add your function code here!
+  if (isFree && !isPay) {
+    return true;
+  } else {
+    return false;
+  }
+}
