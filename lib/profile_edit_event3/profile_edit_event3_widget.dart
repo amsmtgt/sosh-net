@@ -4,9 +4,9 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../host_event2/host_event2_widget.dart';
-import '../host_event_invitations/host_event_invitations_widget.dart';
-import '../main.dart';
+import '../profile_edit_event/profile_edit_event_widget.dart';
+import '../profile_event_detail/profile_event_detail_widget.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -29,7 +29,8 @@ class _ProfileEditEvent3WidgetState extends State<ProfileEditEvent3Widget> {
   TextEditingController textController;
   bool switchListTileValue2;
   bool switchListTileValue1;
-  bool _loadingButton = false;
+  bool _loadingButton1 = false;
+  bool _loadingButton2 = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -91,7 +92,8 @@ class _ProfileEditEvent3WidgetState extends State<ProfileEditEvent3Widget> {
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => HostEvent2Widget(),
+                                  builder: (context) =>
+                                      ProfileEditEventWidget(),
                                 ),
                               );
                             },
@@ -109,7 +111,7 @@ class _ProfileEditEvent3WidgetState extends State<ProfileEditEvent3Widget> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      NavBarPage(initialPage: 'HOME'),
+                                      ProfileEventDetailWidget(),
                                 ),
                               );
                             },
@@ -148,6 +150,8 @@ class _ProfileEditEvent3WidgetState extends State<ProfileEditEvent3Widget> {
                           style: FlutterFlowTheme.bodyText1.override(
                             fontFamily: 'Nunito',
                             color: FlutterFlowTheme.violet2,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
@@ -308,127 +312,128 @@ class _ProfileEditEvent3WidgetState extends State<ProfileEditEvent3Widget> {
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 25),
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          FlutterFlowTheme.primaryColor,
-                          Color(0xFF844DFF)
-                        ],
-                        stops: [0, 1],
-                        begin: AlignmentDirectional(1, -0.94),
-                        end: AlignmentDirectional(-1, 0.94),
-                      ),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        setState(() => _loadingButton = true);
-                        try {
-                          final eventsUpdateData = createEventsRecordData(
-                            isFree: switchListTileValue1,
-                            isPayed: switchListTileValue2,
-                            price: double.parse(textController.text),
-                          );
-                          await widget.refEvent.update(eventsUpdateData);
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  HostEventInvitationsWidget(),
-                            ),
-                          );
-                        } finally {
-                          setState(() => _loadingButton = false);
-                        }
-                      },
-                      text: 'Save changes',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 40,
-                        color: Color(0x003A2EE8),
-                        textStyle: FlutterFlowTheme.subtitle2.override(
-                          fontFamily: 'Nunito',
-                          color: Colors.white,
-                          fontSize: 18,
+                Visibility(
+                  visible: (functions.showSwitch(
+                          switchListTileValue1, switchListTileValue2)) ==
+                      (true),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 25),
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            FlutterFlowTheme.primaryColor,
+                            Color(0xFF844DFF)
+                          ],
+                          stops: [0, 1],
+                          begin: AlignmentDirectional(1, -0.94),
+                          end: AlignmentDirectional(-1, 0.94),
                         ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: 12,
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                      loading: _loadingButton,
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          setState(() => _loadingButton1 = true);
+                          try {
+                            final eventsUpdateData = createEventsRecordData(
+                              isFree: true,
+                              isPayed: false,
+                              price: 0.0,
+                            );
+                            await widget.refEvent.update(eventsUpdateData);
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfileEditEventWidget(),
+                              ),
+                            );
+                          } finally {
+                            setState(() => _loadingButton1 = false);
+                          }
+                        },
+                        text: 'Save',
+                        options: FFButtonOptions(
+                          width: double.infinity,
+                          height: 40,
+                          color: Color(0x003A2EE8),
+                          textStyle: FlutterFlowTheme.subtitle2.override(
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: 12,
+                        ),
+                        loading: _loadingButton1,
+                      ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 25),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
-                        child: Material(
-                          color: Colors.transparent,
-                          elevation: 2,
-                          shape: const CircleBorder(),
-                          child: Container(
-                            width: 11,
-                            height: 11,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.blue1,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
+                Visibility(
+                  visible: (functions.showSwitch(
+                          switchListTileValue2, switchListTileValue1)) ==
+                      (true),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 25),
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            FlutterFlowTheme.primaryColor,
+                            Color(0xFF844DFF)
+                          ],
+                          stops: [0, 1],
+                          begin: AlignmentDirectional(1, -0.94),
+                          end: AlignmentDirectional(-1, 0.94),
                         ),
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
-                        child: Material(
-                          color: Colors.transparent,
-                          elevation: 2,
-                          shape: const CircleBorder(),
-                          child: Container(
-                            width: 11,
-                            height: 11,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.blue1,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: FlutterFlowTheme.blue1,
-                                width: 2,
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          setState(() => _loadingButton2 = true);
+                          try {
+                            final eventsUpdateData = createEventsRecordData(
+                              isPayed: true,
+                              price: double.parse(textController.text),
+                              isFree: false,
+                            );
+                            await widget.refEvent.update(eventsUpdateData);
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfileEditEventWidget(),
                               ),
-                            ),
+                            );
+                          } finally {
+                            setState(() => _loadingButton2 = false);
+                          }
+                        },
+                        text: 'Save',
+                        options: FFButtonOptions(
+                          width: double.infinity,
+                          height: 40,
+                          color: Color(0x003A2EE8),
+                          textStyle: FlutterFlowTheme.subtitle2.override(
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
+                            fontSize: 18,
                           ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: 12,
                         ),
+                        loading: _loadingButton2,
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
-                        child: Material(
-                          color: Colors.transparent,
-                          elevation: 2,
-                          shape: const CircleBorder(),
-                          child: Container(
-                            width: 11,
-                            height: 11,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.blue1,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: FlutterFlowTheme.blue1,
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                 )
               ],

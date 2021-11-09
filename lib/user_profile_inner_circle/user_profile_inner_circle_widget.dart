@@ -160,8 +160,8 @@ class _UserProfileInnerCircleWidgetState
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(0),
-                                child: Image.asset(
-                                  'assets/images/gradient.jpeg',
+                                child: Image.network(
+                                  '',
                                   width: double.infinity,
                                   height: 50,
                                   fit: BoxFit.cover,

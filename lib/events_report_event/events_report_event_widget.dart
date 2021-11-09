@@ -146,7 +146,7 @@ class _EventsReportEventWidgetState extends State<EventsReportEventWidget> {
                                   'Select an option',
                                   style: FlutterFlowTheme.bodyText1.override(
                                     fontFamily: 'Nunito',
-                                    color: Color(0xFF9060FF),
+                                    color: FlutterFlowTheme.white2,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -197,7 +197,7 @@ class _EventsReportEventWidgetState extends State<EventsReportEventWidget> {
                                     'Write a comment',
                                     style: FlutterFlowTheme.bodyText1.override(
                                       fontFamily: 'Nunito',
-                                      color: Color(0xFF9060FF),
+                                      color: FlutterFlowTheme.white2,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                     ),

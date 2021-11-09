@@ -137,7 +137,7 @@ class _ProfileCircleWidgetState extends State<ProfileCircleWidget> {
                                   borderWidth: 1,
                                   buttonSize: 46,
                                   icon: Icon(
-                                    Icons.person_add_alt_1_outlined,
+                                    Icons.person_search_outlined,
                                     color: FlutterFlowTheme.secondaryColor,
                                     size: 28,
                                   ),

@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login/login_widget.dart';
 import '../main.dart';
 import '../on_uploadphoto/on_uploadphoto_widget.dart';
+import '../signup/signup_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -74,7 +75,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                           'Sign up',
                           style: FlutterFlowTheme.title3.override(
                             fontFamily: 'Nunito',
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -276,7 +277,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => OnUploadphotoWidget(),
+                                    builder: (context) => SignupWidget(),
                                   ),
                                 );
                               } finally {

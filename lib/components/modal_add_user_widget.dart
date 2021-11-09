@@ -16,10 +16,12 @@ class ModalAddUserWidget extends StatefulWidget {
     Key key,
     this.userToAdd,
     this.userToAddID,
+    this.userToAddName,
   }) : super(key: key);
 
   final DocumentReference userToAdd;
   final String userToAddID;
+  final String userToAddName;
 
   @override
   _ModalAddUserWidgetState createState() => _ModalAddUserWidgetState();
@@ -113,7 +115,10 @@ class _ModalAddUserWidgetState extends State<ModalAddUserWidget> {
                             child: Text(
                               'Add user to your circle?',
                               textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.subtitle1,
+                              style: FlutterFlowTheme.subtitle1.override(
+                                fontFamily: 'Nunito',
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                           Visibility(
@@ -182,7 +187,7 @@ class _ModalAddUserWidgetState extends State<ModalAddUserWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 30, 20, 0),
+                                EdgeInsetsDirectional.fromSTEB(25, 30, 25, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -200,7 +205,7 @@ class _ModalAddUserWidgetState extends State<ModalAddUserWidget> {
                                         FlutterFlowTheme.subtitle2.override(
                                       fontFamily: 'Nunito',
                                       color: FlutterFlowTheme.violet2,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                     ),
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.violet2,
@@ -286,6 +291,25 @@ class _ModalAddUserWidgetState extends State<ModalAddUserWidget> {
                                                         await widget.userToAdd
                                                             .update(
                                                                 usersUpdateData);
+
+                                                        final notificationsCreateData =
+                                                            createNotificationsRecordData(
+                                                          user:
+                                                              widget.userToAdd,
+                                                          message:
+                                                              '${currentUserDisplayName} requests entry to your inner circle',
+                                                          date:
+                                                              getCurrentTimestamp,
+                                                          hasEvent: false,
+                                                          type: 'innerRequest',
+                                                          notificationImage:
+                                                              currentUserPhoto,
+                                                        );
+                                                        await NotificationsRecord
+                                                            .collection
+                                                            .doc()
+                                                            .set(
+                                                                notificationsCreateData);
                                                         Navigator.pop(context);
                                                       } finally {
                                                         setState(() =>
@@ -304,6 +328,7 @@ class _ModalAddUserWidgetState extends State<ModalAddUserWidget> {
                                                               .override(
                                                         fontFamily: 'Nunito',
                                                         color: Colors.white,
+                                                        fontSize: 16,
                                                       ),
                                                       borderSide: BorderSide(
                                                         color:
@@ -367,6 +392,7 @@ class _ModalAddUserWidgetState extends State<ModalAddUserWidget> {
                                                               .override(
                                                         fontFamily: 'Nunito',
                                                         color: Colors.white,
+                                                        fontSize: 16,
                                                       ),
                                                       borderSide: BorderSide(
                                                         color:
@@ -425,6 +451,7 @@ class _ModalAddUserWidgetState extends State<ModalAddUserWidget> {
                                                     .override(
                                                   fontFamily: 'Nunito',
                                                   color: Colors.white,
+                                                  fontSize: 16,
                                                 ),
                                                 borderSide: BorderSide(
                                                   color: Colors.transparent,

@@ -1,10 +1,12 @@
 import '../components/modal_cancel_event_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../profile_edit_event/profile_edit_event_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ModalEventOptionsWidget extends StatefulWidget {
   ModalEventOptionsWidget({
@@ -66,64 +68,76 @@ class _ModalEventOptionsWidgetState extends State<ModalEventOptionsWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(15, 25, 15, 0),
-              child: Container(
-                width: double.infinity,
-                height: 46,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.shadow,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                        child: Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [Color(0x6A2431E4), Color(0x14080618)],
-                              stops: [0, 1],
-                              begin: AlignmentDirectional(-0.64, 1),
-                              end: AlignmentDirectional(0.64, -1),
-                            ),
-                            borderRadius: BorderRadius.circular(11),
-                            shape: BoxShape.rectangle,
-                          ),
-                          child: Icon(
-                            Icons.edit_sharp,
-                            color: FlutterFlowTheme.blue1,
-                            size: 20,
-                          ),
-                        ),
+              child: InkWell(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileEditEventWidget(
+                        refEvent: widget.refEvent,
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
-                              child: Text(
-                                'Edit event',
-                                style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 46,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.shadow,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 5),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                          child: Container(
+                            width: 35,
+                            height: 35,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Color(0x6A2431E4), Color(0x14080618)],
+                                stops: [0, 1],
+                                begin: AlignmentDirectional(-0.64, 1),
+                                end: AlignmentDirectional(0.64, -1),
                               ),
-                            )
-                          ],
+                              borderRadius: BorderRadius.circular(11),
+                              shape: BoxShape.rectangle,
+                            ),
+                            child: Icon(
+                              Icons.edit_sharp,
+                              color: FlutterFlowTheme.blue1,
+                              size: 20,
+                            ),
+                          ),
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
+                                child: Text(
+                                  'Edit event',
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Nunito',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -207,64 +221,69 @@ class _ModalEventOptionsWidgetState extends State<ModalEventOptionsWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(15, 8, 15, 0),
-              child: Container(
-                width: double.infinity,
-                height: 46,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.shadow,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                        child: Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [Color(0x6A2431E4), Color(0x14080618)],
-                              stops: [0, 1],
-                              begin: AlignmentDirectional(-0.64, 1),
-                              end: AlignmentDirectional(0.64, -1),
-                            ),
-                            borderRadius: BorderRadius.circular(11),
-                            shape: BoxShape.rectangle,
-                          ),
-                          child: Icon(
-                            Icons.share_sharp,
-                            color: FlutterFlowTheme.blue1,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
-                              child: Text(
-                                'Share link',
-                                style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
+              child: InkWell(
+                onTap: () async {
+                  await Share.share('https://www.apple.com/app-store/');
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 46,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.shadow,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 5),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                          child: Container(
+                            width: 35,
+                            height: 35,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Color(0x6A2431E4), Color(0x14080618)],
+                                stops: [0, 1],
+                                begin: AlignmentDirectional(-0.64, 1),
+                                end: AlignmentDirectional(0.64, -1),
                               ),
-                            )
-                          ],
+                              borderRadius: BorderRadius.circular(11),
+                              shape: BoxShape.rectangle,
+                            ),
+                            child: Icon(
+                              Icons.share_sharp,
+                              color: FlutterFlowTheme.blue1,
+                              size: 20,
+                            ),
+                          ),
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
+                                child: Text(
+                                  'Share link',
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Nunito',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

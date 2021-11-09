@@ -53,77 +53,92 @@ class _ModalCancelEventWidgetState extends State<ModalCancelEventWidget> {
                   child: Text(
                     'Are you sure you want \nto cancel the event?',
                     textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.subtitle1,
+                    style: FlutterFlowTheme.subtitle1.override(
+                      fontFamily: 'Nunito',
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 30, 20, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                  child: Text(
+                    'We will send a notification to all guests.',
+                    style: FlutterFlowTheme.bodyText1,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(25, 30, 25, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Expanded(
-                        child: Container(
-                          width: 20,
+                      FFButtonWidget(
+                        onPressed: () async {
+                          Navigator.pop(context);
+                        },
+                        text: 'No',
+                        options: FFButtonOptions(
+                          width: 140,
                           height: 42,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                FlutterFlowTheme.primaryColor,
-                                Color(0xFF844DFF)
-                              ],
-                              stops: [0, 1],
-                              begin: AlignmentDirectional(1, -0.94),
-                              end: AlignmentDirectional(-1, 0.94),
-                            ),
-                            borderRadius: BorderRadius.circular(50),
+                          color: Color(0x002431E4),
+                          textStyle: FlutterFlowTheme.subtitle2.override(
+                            fontFamily: 'Nunito',
+                            color: FlutterFlowTheme.violet2,
+                            fontSize: 18,
                           ),
-                          child: FFButtonWidget(
-                            onPressed: () {
-                              print('ButtonGradient pressed ...');
-                            },
-                            text: 'No',
-                            options: FFButtonOptions(
-                              width: 20,
-                              height: 40,
-                              color: Color(0x003A2EE8),
-                              textStyle: FlutterFlowTheme.subtitle2.override(
-                                fontFamily: 'Nunito',
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: 12,
-                            ),
-                            loading: _loadingButton,
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.violet2,
+                            width: 2,
                           ),
+                          borderRadius: 50,
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            Navigator.pop(context);
-                          },
-                          text: 'Yes',
-                          options: FFButtonOptions(
-                            width: 140,
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                          child: Container(
+                            width: 125,
                             height: 42,
-                            color: Color(0x002431E4),
-                            textStyle: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Nunito',
-                              color: FlutterFlowTheme.violet2,
-                              fontSize: 18,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  FlutterFlowTheme.primaryColor,
+                                  Color(0xFF844DFF)
+                                ],
+                                stops: [0, 1],
+                                begin: AlignmentDirectional(1, -0.94),
+                                end: AlignmentDirectional(-1, 0.94),
+                              ),
+                              borderRadius: BorderRadius.circular(50),
                             ),
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.violet2,
-                              width: 2,
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                setState(() => _loadingButton = true);
+                                try {
+                                  Navigator.pop(context);
+                                } finally {
+                                  setState(() => _loadingButton = false);
+                                }
+                              },
+                              text: 'Yes, cancel',
+                              options: FFButtonOptions(
+                                width: 140,
+                                height: 40,
+                                color: Color(0x003A2EE8),
+                                textStyle: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Nunito',
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                              loading: _loadingButton,
                             ),
-                            borderRadius: 50,
                           ),
                         ),
                       )

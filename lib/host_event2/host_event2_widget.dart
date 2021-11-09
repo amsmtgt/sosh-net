@@ -213,6 +213,8 @@ class _HostEvent2WidgetState extends State<HostEvent2Widget> {
                                     style: FlutterFlowTheme.bodyText1.override(
                                       fontFamily: 'Nunito',
                                       color: FlutterFlowTheme.violet2,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),

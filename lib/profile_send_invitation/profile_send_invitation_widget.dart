@@ -2,7 +2,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../profile_event_detail/profile_event_detail_widget.dart';
+import '../profile_invitations_sent/profile_invitations_sent_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -44,7 +44,6 @@ class _ProfileSendInvitationWidgetState
   bool _loadingButton4 = false;
   bool _loadingButton5 = false;
   bool _loadingButton6 = false;
-  bool _loadingButton7 = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -95,12 +94,18 @@ class _ProfileSendInvitationWidgetState
                             borderRadius: 30,
                             buttonSize: 46,
                             icon: Icon(
-                              Icons.arrow_back_ios,
+                              Icons.close,
                               color: FlutterFlowTheme.secondaryColor,
                               size: 25,
                             ),
                             onPressed: () async {
-                              Navigator.pop(context);
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ProfileInvitationsSentWidget(),
+                                ),
+                              );
                             },
                           ),
                           Expanded(
@@ -987,63 +992,6 @@ class _ProfileSendInvitationWidgetState
                   ),
                 ),
               ),
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 25),
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          FlutterFlowTheme.primaryColor,
-                          FlutterFlowTheme.secondaryColor
-                        ],
-                        stops: [0, 1],
-                        begin: AlignmentDirectional(1, -0.94),
-                        end: AlignmentDirectional(-1, 0.94),
-                      ),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        setState(() => _loadingButton7 = true);
-                        try {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProfileEventDetailWidget(),
-                            ),
-                          );
-                        } finally {
-                          setState(() => _loadingButton7 = false);
-                        }
-                      },
-                      text: 'Done',
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 40,
-                        color: Color(0x003A2EE8),
-                        textStyle: FlutterFlowTheme.subtitle2.override(
-                          fontFamily: 'Nunito',
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: 12,
-                      ),
-                      loading: _loadingButton7,
-                    ),
-                  ),
-                )
-              ],
             )
           ],
         ),

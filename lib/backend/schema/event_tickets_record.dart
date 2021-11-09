@@ -35,6 +35,12 @@ abstract class EventTicketsRecord
   bool get approvedByUser;
 
   @nullable
+  bool get invitedByUser;
+
+  @nullable
+  String get uniqueCode;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -43,7 +49,9 @@ abstract class EventTicketsRecord
     ..status = ''
     ..approved = false
     ..userId = ''
-    ..approvedByUser = false;
+    ..approvedByUser = false
+    ..invitedByUser = false
+    ..uniqueCode = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('EventTickets');
@@ -71,6 +79,8 @@ Map<String, dynamic> createEventTicketsRecordData({
   bool approved,
   String userId,
   bool approvedByUser,
+  bool invitedByUser,
+  String uniqueCode,
 }) =>
     serializers.toFirestore(
         EventTicketsRecord.serializer,
@@ -81,4 +91,6 @@ Map<String, dynamic> createEventTicketsRecordData({
           ..status = status
           ..approved = approved
           ..userId = userId
-          ..approvedByUser = approvedByUser));
+          ..approvedByUser = approvedByUser
+          ..invitedByUser = invitedByUser
+          ..uniqueCode = uniqueCode));

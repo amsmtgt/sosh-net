@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HostEventInvitationsWidget extends StatefulWidget {
   HostEventInvitationsWidget({
@@ -181,17 +182,22 @@ class _HostEventInvitationsWidgetState
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    'Event Code: ${valueOrDefault<String>(
-                                      hostEventInvitationsEventsRecord
-                                          .eventCode,
-                                      '0000',
-                                    )}',
-                                    style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Nunito',
-                                      color: FlutterFlowTheme.violet2,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 5, 0, 0),
+                                    child: Text(
+                                      'Event Code: ${valueOrDefault<String>(
+                                        hostEventInvitationsEventsRecord
+                                            .eventCode,
+                                        '0000',
+                                      )}',
+                                      style:
+                                          FlutterFlowTheme.bodyText1.override(
+                                        fontFamily: 'Nunito',
+                                        color: FlutterFlowTheme.violet2,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   )
                                 ],
@@ -336,18 +342,25 @@ class _HostEventInvitationsWidgetState
                                 color: FlutterFlowTheme.shadow,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: ListTile(
-                                title: Text(
-                                  'Share link',
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Nunito',
-                                    fontWeight: FontWeight.w500,
+                              child: InkWell(
+                                onTap: () async {
+                                  await Share.share(
+                                      'https://www.apple.com/app-store/');
+                                },
+                                child: ListTile(
+                                  title: Text(
+                                    'Share link',
+                                    style: FlutterFlowTheme.bodyText1.override(
+                                      fontFamily: 'Nunito',
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
+                                  tileColor: Color(0xFFF5F5F5),
+                                  dense: false,
+                                  contentPadding:
+                                      EdgeInsetsDirectional.fromSTEB(
+                                          15, 2, 15, 0),
                                 ),
-                                tileColor: Color(0xFFF5F5F5),
-                                dense: false,
-                                contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    15, 2, 15, 0),
                               ),
                             ),
                           )

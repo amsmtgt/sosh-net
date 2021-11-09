@@ -29,12 +29,20 @@ abstract class NotificationsRecord
   bool get hasEvent;
 
   @nullable
+  String get type;
+
+  @nullable
+  String get notificationImage;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(NotificationsRecordBuilder builder) => builder
     ..message = ''
-    ..hasEvent = false;
+    ..hasEvent = false
+    ..type = ''
+    ..notificationImage = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Notifications');
@@ -60,6 +68,8 @@ Map<String, dynamic> createNotificationsRecordData({
   DateTime date,
   DocumentReference event,
   bool hasEvent,
+  String type,
+  String notificationImage,
 }) =>
     serializers.toFirestore(
         NotificationsRecord.serializer,
@@ -68,4 +78,6 @@ Map<String, dynamic> createNotificationsRecordData({
           ..message = message
           ..date = date
           ..event = event
-          ..hasEvent = hasEvent));
+          ..hasEvent = hasEvent
+          ..type = type
+          ..notificationImage = notificationImage));

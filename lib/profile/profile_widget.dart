@@ -1,12 +1,13 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../camera_tickets/camera_tickets_widget.dart';
 import '../components/modal_logout_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../myprofile/myprofile_widget.dart';
 import '../profile_circle/profile_circle_widget.dart';
-import '../profile_my_events/profile_my_events_widget.dart';
+import '../profile_m_y_e_v_e_n_t_s/profile_m_y_e_v_e_n_t_s_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -447,26 +448,26 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     15, 15, 15, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.shadow,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        15, 0, 15, 0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProfileMyEventsWidget(),
-                                          ),
-                                        );
-                                      },
+                                child: InkWell(
+                                  onTap: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProfileMYEVENTSWidget(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.shadow,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          15, 0, 15, 0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
@@ -517,58 +518,69 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     15, 15, 15, 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.shadow,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        15, 0, 15, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Container(
-                                          width: 35,
-                                          height: 35,
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                Color(0x932431E4),
-                                                Color(0x14080618)
-                                              ],
-                                              stops: [0, 1],
-                                              begin: AlignmentDirectional(
-                                                  -0.64, 1),
-                                              end: AlignmentDirectional(
-                                                  0.64, -1),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            CameraTicketsWidget(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.shadow,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          15, 0, 15, 0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Container(
+                                            width: 35,
+                                            height: 35,
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Color(0x932431E4),
+                                                  Color(0x14080618)
+                                                ],
+                                                stops: [0, 1],
+                                                begin: AlignmentDirectional(
+                                                    -0.64, 1),
+                                                end: AlignmentDirectional(
+                                                    0.64, -1),
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(11),
+                                              shape: BoxShape.rectangle,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(11),
-                                            shape: BoxShape.rectangle,
-                                          ),
-                                          child: Icon(
-                                            Icons.attach_money_sharp,
-                                            color: FlutterFlowTheme.blue1,
-                                            size: 20,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15, 0, 0, 0),
-                                          child: Text(
-                                            'Payments management',
-                                            style: FlutterFlowTheme.bodyText1
-                                                .override(
-                                              fontFamily: 'Nunito',
-                                              fontWeight: FontWeight.normal,
+                                            child: Icon(
+                                              Icons.image_aspect_ratio_sharp,
+                                              color: FlutterFlowTheme.blue1,
+                                              size: 20,
                                             ),
                                           ),
-                                        )
-                                      ],
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    15, 0, 0, 0),
+                                            child: Text(
+                                              'My tickets',
+                                              style: FlutterFlowTheme.bodyText1
+                                                  .override(
+                                                fontFamily: 'Nunito',
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

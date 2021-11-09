@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../profile_add_payment_method/profile_add_payment_method_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,8 @@ class EventsRequestEntryWidget extends StatefulWidget {
 class _EventsRequestEntryWidgetState extends State<EventsRequestEntryWidget> {
   bool _loadingButton1 = false;
   bool _loadingButton2 = false;
+  bool _loadingButton3 = false;
+  bool _loadingButton4 = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -635,77 +638,132 @@ class _EventsRequestEntryWidgetState extends State<EventsRequestEntryWidget> {
                         ),
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          setState(() => _loadingButton1 = true);
-                          try {
-                            final eventTicketsCreateData =
-                                createEventTicketsRecordData(
-                              event: widget.refEvent,
-                              user: currentUserReference,
-                              noTickets: 1,
-                              status: 'Approved',
-                              approved: true,
-                              userId: currentUserUid,
-                              approvedByUser: true,
-                            );
-                            await EventTicketsRecord.collection
-                                .doc()
-                                .set(eventTicketsCreateData);
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Visibility(
+                            visible: widget.isFree ?? true,
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                setState(() => _loadingButton1 = true);
+                                try {
+                                  final eventTicketsCreateData =
+                                      createEventTicketsRecordData(
+                                    event: widget.refEvent,
+                                    user: currentUserReference,
+                                    noTickets: 1,
+                                    status: 'Approved',
+                                    approved: true,
+                                    userId: currentUserUid,
+                                    approvedByUser: true,
+                                    invitedByUser: false,
+                                    uniqueCode: functions
+                                        .uniqueCodeEvent(widget.eventTitle),
+                                  );
+                                  await EventTicketsRecord.collection
+                                      .doc()
+                                      .set(eventTicketsCreateData);
 
-                            final notificationsCreateData =
-                                createNotificationsRecordData(
-                              user: widget.ownerEvent,
-                              message:
-                                  'The user ${currentUserDisplayName} has purchased a ticket to your event',
-                              date: getCurrentTimestamp,
-                              event: widget.refEvent,
-                            );
-                            await NotificationsRecord.collection
-                                .doc()
-                                .set(notificationsCreateData);
+                                  final notificationsCreateData =
+                                      createNotificationsRecordData(
+                                    user: widget.ownerEvent,
+                                    message:
+                                        '${currentUserDisplayName} has purchased a ticket to your event',
+                                    date: getCurrentTimestamp,
+                                    event: widget.refEvent,
+                                    hasEvent: true,
+                                    type: 'buyTicket',
+                                    notificationImage: currentUserPhoto,
+                                  );
+                                  await NotificationsRecord.collection
+                                      .doc()
+                                      .set(notificationsCreateData);
 
-                            final eventsUpdateData = {
-                              'grantedTickets': FieldValue.increment(1),
-                            };
-                            await widget.refEvent.update(eventsUpdateData);
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Color(0x4D080618),
-                              barrierColor: Color(0x4D080618),
-                              context: context,
-                              builder: (context) {
-                                return ModalConfirmationPublicTickeWidget();
+                                  final eventsUpdateData = {
+                                    'grantedTickets': FieldValue.increment(1),
+                                  };
+                                  await widget.refEvent
+                                      .update(eventsUpdateData);
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Color(0x4D080618),
+                                    barrierColor: Color(0x4D080618),
+                                    context: context,
+                                    builder: (context) {
+                                      return ModalConfirmationPublicTickeWidget();
+                                    },
+                                  );
+                                } finally {
+                                  setState(() => _loadingButton1 = false);
+                                }
                               },
-                            );
-                          } finally {
-                            setState(() => _loadingButton1 = false);
-                          }
-                        },
-                        text: 'Get Ticket',
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 40,
-                          color: Color(0x003A2EE8),
-                          textStyle: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Nunito',
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                              text: 'Get Ticket',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 40,
+                                color: Color(0x003A2EE8),
+                                textStyle: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Nunito',
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                              loading: _loadingButton1,
+                            ),
                           ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
-                        loading: _loadingButton1,
+                          Visibility(
+                            visible: widget.isPayed ?? true,
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                setState(() => _loadingButton2 = true);
+                                try {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ProfileAddPaymentMethodWidget(
+                                        refEvent: widget.refEvent,
+                                      ),
+                                    ),
+                                  );
+                                } finally {
+                                  setState(() => _loadingButton2 = false);
+                                }
+                              },
+                              text: 'Get Ticket',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 40,
+                                color: Color(0x003A2EE8),
+                                textStyle: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Nunito',
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                              loading: _loadingButton2,
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
                 ),
                 Visibility(
-                  visible: !(functions.eventIsPublic(widget.eventType)) ?? true,
+                  visible:
+                      !(functions.eventIsPrivate(widget.eventType)) ?? true,
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(15, 5, 15, 25),
                     child: Container(
@@ -723,66 +781,116 @@ class _EventsRequestEntryWidgetState extends State<EventsRequestEntryWidget> {
                         ),
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          setState(() => _loadingButton2 = true);
-                          try {
-                            final eventTicketsCreateData =
-                                createEventTicketsRecordData(
-                              event: widget.refEvent,
-                              user: currentUserReference,
-                              noTickets: 1,
-                              status: 'Pending',
-                              approved: false,
-                              userId: currentUserUid,
-                              approvedByUser: true,
-                            );
-                            await EventTicketsRecord.collection
-                                .doc()
-                                .set(eventTicketsCreateData);
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Visibility(
+                            visible: widget.isFree ?? true,
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                setState(() => _loadingButton3 = true);
+                                try {
+                                  final eventTicketsCreateData =
+                                      createEventTicketsRecordData(
+                                    event: widget.refEvent,
+                                    user: currentUserReference,
+                                    noTickets: 1,
+                                    status: 'Pending',
+                                    approved: false,
+                                    userId: currentUserUid,
+                                    approvedByUser: true,
+                                  );
+                                  await EventTicketsRecord.collection
+                                      .doc()
+                                      .set(eventTicketsCreateData);
 
-                            final notificationsCreateData =
-                                createNotificationsRecordData(
-                              user: widget.ownerEvent,
-                              message:
-                                  'The user ${currentUserDisplayName} has sent you a request.',
-                              date: getCurrentTimestamp,
-                              event: widget.refEvent,
-                            );
-                            await NotificationsRecord.collection
-                                .doc()
-                                .set(notificationsCreateData);
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Color(0x4D080618),
-                              barrierColor: Color(0x4D080618),
-                              context: context,
-                              builder: (context) {
-                                return ModalConfirmationTicketWidget();
+                                  final notificationsCreateData =
+                                      createNotificationsRecordData(
+                                    user: widget.ownerEvent,
+                                    message:
+                                        '${currentUserDisplayName} has sent you a request.',
+                                    date: getCurrentTimestamp,
+                                    event: widget.refEvent,
+                                    hasEvent: true,
+                                    type: 'requestTicket',
+                                    notificationImage: currentUserPhoto,
+                                  );
+                                  await NotificationsRecord.collection
+                                      .doc()
+                                      .set(notificationsCreateData);
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Color(0x4D080618),
+                                    barrierColor: Color(0x4D080618),
+                                    context: context,
+                                    builder: (context) {
+                                      return ModalConfirmationTicketWidget();
+                                    },
+                                  );
+                                } finally {
+                                  setState(() => _loadingButton3 = false);
+                                }
                               },
-                            );
-                          } finally {
-                            setState(() => _loadingButton2 = false);
-                          }
-                        },
-                        text: 'Send request',
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 40,
-                          color: Color(0x003A2EE8),
-                          textStyle: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Nunito',
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                              text: 'Send request',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 40,
+                                color: Color(0x003A2EE8),
+                                textStyle: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Nunito',
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                              loading: _loadingButton3,
+                            ),
                           ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
-                        loading: _loadingButton2,
+                          Visibility(
+                            visible: widget.isPayed ?? true,
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                setState(() => _loadingButton4 = true);
+                                try {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ProfileAddPaymentMethodWidget(
+                                        refEvent: widget.refEvent,
+                                      ),
+                                    ),
+                                  );
+                                } finally {
+                                  setState(() => _loadingButton4 = false);
+                                }
+                              },
+                              text: 'Send request',
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 40,
+                                color: Color(0x003A2EE8),
+                                textStyle: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Nunito',
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                              loading: _loadingButton4,
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),

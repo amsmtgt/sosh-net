@@ -1,9 +1,9 @@
 import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../signup/signup_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +23,6 @@ class _LoginWidgetState extends State<LoginWidget> {
   bool _loadingButton1 = false;
   bool _loadingButton2 = false;
   bool _loadingButton3 = false;
-  dynamic outputJson;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -74,7 +73,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                           'Login',
                           style: FlutterFlowTheme.title2.override(
                             fontFamily: 'Nunito',
-                            fontWeight: FontWeight.w600,
+                            fontSize: 31,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -262,6 +262,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             labelText: 'Mobile number',
                             labelStyle: FlutterFlowTheme.bodyText1.override(
                               fontFamily: 'Nunito',
+                              color: FlutterFlowTheme.white2,
                               fontWeight: FontWeight.normal,
                             ),
                             enabledBorder: UnderlineInputBorder(
@@ -279,12 +280,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             filled: true,
-                            fillColor: Color(0x7D1A134D),
+                            fillColor: FlutterFlowTheme.shadow,
                             contentPadding:
-                                EdgeInsetsDirectional.fromSTEB(20, 15, 15, 15),
+                                EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
                           ),
                           style: FlutterFlowTheme.bodyText1.override(
                             fontFamily: 'Nunito',
+                            color: FlutterFlowTheme.white2,
                             fontWeight: FontWeight.normal,
                           ),
                           keyboardType: TextInputType.phone,
@@ -306,6 +308,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             labelText: 'Password',
                             labelStyle: FlutterFlowTheme.bodyText1.override(
                               fontFamily: 'Nunito',
+                              color: FlutterFlowTheme.white2,
                               fontWeight: FontWeight.normal,
                             ),
                             enabledBorder: UnderlineInputBorder(
@@ -323,9 +326,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             filled: true,
-                            fillColor: Color(0x7E1A134D),
+                            fillColor: FlutterFlowTheme.shadow,
                             contentPadding:
-                                EdgeInsetsDirectional.fromSTEB(20, 15, 15, 15),
+                                EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
                             suffixIcon: InkWell(
                               onTap: () => setState(
                                 () => passwordVisibility = !passwordVisibility,
@@ -334,13 +337,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 passwordVisibility
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
-                                color: FlutterFlowTheme.tertiaryColor,
-                                size: 22,
+                                color: FlutterFlowTheme.secondaryColor,
+                                size: 20,
                               ),
                             ),
                           ),
                           style: FlutterFlowTheme.bodyText1.override(
                             fontFamily: 'Nunito',
+                            color: FlutterFlowTheme.white2,
                             fontWeight: FontWeight.normal,
                           ),
                           validator: (val) {
@@ -410,19 +414,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                           width: double.infinity,
                           height: 30,
                           decoration: BoxDecoration(),
-                          child: InkWell(
-                            onTap: () async {
-                              outputJson = await testApiCall();
-
-                              setState(() {});
-                            },
-                            child: Text(
-                              'Forgot Password',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Nunito',
-                                color: FlutterFlowTheme.violet2,
-                              ),
+                          child: Text(
+                            'Forgot Password',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.bodyText1.override(
+                              fontFamily: 'Nunito',
+                              color: FlutterFlowTheme.violet2,
                             ),
                           ),
                         ),
@@ -437,12 +434,22 @@ class _LoginWidgetState extends State<LoginWidget> {
                               'Don\'t have an account? ',
                               style: FlutterFlowTheme.bodyText1,
                             ),
-                            Text(
-                              'Sign up',
-                              style: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Nunito',
-                                color: FlutterFlowTheme.violet1,
-                                fontWeight: FontWeight.bold,
+                            InkWell(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignupWidget(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Sign up',
+                                style: FlutterFlowTheme.bodyText1.override(
+                                  fontFamily: 'Nunito',
+                                  color: FlutterFlowTheme.violet1,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             )
                           ],

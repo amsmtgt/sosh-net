@@ -55,11 +55,14 @@ class _ModalLogoutWidgetState extends State<ModalLogoutWidget> {
                   child: Text(
                     'Are you sure you want \nto logout?',
                     textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.subtitle1,
+                    style: FlutterFlowTheme.subtitle1.override(
+                      fontFamily: 'Nunito',
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 30, 20, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(25, 30, 25, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -70,13 +73,13 @@ class _ModalLogoutWidgetState extends State<ModalLogoutWidget> {
                         },
                         text: 'Cancel',
                         options: FFButtonOptions(
-                          width: 140,
+                          width: 135,
                           height: 42,
                           color: Color(0x002431E4),
                           textStyle: FlutterFlowTheme.subtitle2.override(
                             fontFamily: 'Nunito',
                             color: FlutterFlowTheme.violet2,
-                            fontSize: 18,
+                            fontSize: 16,
                           ),
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.violet2,
@@ -85,60 +88,55 @@ class _ModalLogoutWidgetState extends State<ModalLogoutWidget> {
                           borderRadius: 50,
                         ),
                       ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                          child: Container(
-                            width: 20,
-                            height: 42,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  FlutterFlowTheme.primaryColor,
-                                  Color(0xFF844DFF)
-                                ],
-                                stops: [0, 1],
-                                begin: AlignmentDirectional(1, -0.94),
-                                end: AlignmentDirectional(-1, 0.94),
-                              ),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                setState(() => _loadingButton = true);
-                                try {
-                                  await signOut();
-                                  await Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => WelcomeWidget(),
-                                    ),
-                                    (r) => false,
-                                  );
-                                } finally {
-                                  setState(() => _loadingButton = false);
-                                }
-                              },
-                              text: 'Logout',
-                              options: FFButtonOptions(
-                                width: 20,
-                                height: 40,
-                                color: Color(0x003A2EE8),
-                                textStyle: FlutterFlowTheme.subtitle2.override(
-                                  fontFamily: 'Nunito',
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: 12,
-                              ),
-                              loading: _loadingButton,
-                            ),
+                      Container(
+                        width: 135,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              FlutterFlowTheme.primaryColor,
+                              FlutterFlowTheme.secondaryColor
+                            ],
+                            stops: [0, 1],
+                            begin: AlignmentDirectional(1, -0.94),
+                            end: AlignmentDirectional(-1, 0.94),
                           ),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            setState(() => _loadingButton = true);
+                            try {
+                              await signOut();
+                              await Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => WelcomeWidget(),
+                                ),
+                                (r) => false,
+                              );
+                            } finally {
+                              setState(() => _loadingButton = false);
+                            }
+                          },
+                          text: 'Logout',
+                          options: FFButtonOptions(
+                            width: 120,
+                            height: 42,
+                            color: Color(0x003A2EE8),
+                            textStyle: FlutterFlowTheme.subtitle2.override(
+                              fontFamily: 'Nunito',
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: 12,
+                          ),
+                          loading: _loadingButton,
                         ),
                       )
                     ],

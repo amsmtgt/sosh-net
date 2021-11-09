@@ -1,3 +1,5 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -19,8 +21,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
   bool _loadingButton2 = false;
   bool _loadingButton3 = false;
   bool _loadingButton4 = false;
-  bool _loadingButton5 = false;
-  bool _loadingButton6 = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -141,698 +141,448 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Expanded(
-                                  child: ListView(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    children: [
-                                      Card(
-                                        clipBehavior:
-                                            Clip.antiAliasWithSaveLayer,
-                                        color: FlutterFlowTheme.shadow,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(10, 12, 15, 20),
-                                                  child: Container(
-                                                    width: 80,
-                                                    height: 80,
-                                                    clipBehavior:
-                                                        Clip.antiAlias,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Image.asset(
-                                                      'assets/images/nightlife-people-having-fun-bars-clubs.jpg',
-                                                      fit: BoxFit.fitHeight,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 15, 10, 0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          5,
-                                                                          0,
-                                                                          0),
-                                                                  child: Text(
-                                                                    'Your entry request to the ',
-                                                                    style: FlutterFlowTheme
-                                                                        .bodyText1
-                                                                        .override(
-                                                                      fontFamily:
-                                                                          'Nunito',
-                                                                      fontSize:
-                                                                          15,
-                                                                    ),
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  'NY apartment',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .start,
+                                  child:
+                                      StreamBuilder<List<NotificationsRecord>>(
+                                    stream: queryNotificationsRecord(
+                                      queryBuilder: (notificationsRecord) =>
+                                          notificationsRecord.where('User',
+                                              isEqualTo: currentUserReference),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitRing(
+                                              color:
+                                                  FlutterFlowTheme.primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<NotificationsRecord>
+                                          listViewNotificationsRecordList =
+                                          snapshot.data;
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            listViewNotificationsRecordList
+                                                .length,
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewNotificationsRecord =
+                                              listViewNotificationsRecordList[
+                                                  listViewIndex];
+                                          return Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 10, 0, 0),
+                                            child: Card(
+                                              clipBehavior:
+                                                  Clip.antiAliasWithSaveLayer,
+                                              color: FlutterFlowTheme.shadow,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(10,
+                                                                    20, 15, 20),
+                                                        child: Container(
+                                                          width: 80,
+                                                          height: 80,
+                                                          clipBehavior:
+                                                              Clip.antiAlias,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: Image.network(
+                                                            listViewNotificationsRecord
+                                                                .notificationImage,
+                                                            fit: BoxFit
+                                                                .fitHeight,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      8, 10, 0),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0,
+                                                                            0,
+                                                                            5,
+                                                                            0),
+                                                                        child:
+                                                                            Text(
+                                                                          listViewNotificationsRecord
+                                                                              .message,
+                                                                          style: FlutterFlowTheme
+                                                                              .bodyText1
+                                                                              .override(
+                                                                            fontFamily:
+                                                                                'Nunito',
+                                                                            fontSize:
+                                                                                15,
+                                                                          ),
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0,
+                                                                            5,
+                                                                            0,
+                                                                            0),
+                                                                child: Text(
+                                                                  dateTimeFormat(
+                                                                      'relative',
+                                                                      listViewNotificationsRecord
+                                                                          .date),
                                                                   style: FlutterFlowTheme
                                                                       .bodyText1
                                                                       .override(
                                                                     fontFamily:
                                                                         'Nunito',
                                                                     color: Color(
-                                                                        0xFFA982FF),
+                                                                        0xFFDBCCFE),
                                                                     fontSize:
-                                                                        15,
+                                                                        14,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .normal,
+                                                                            .w300,
                                                                   ),
                                                                 ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5,
-                                                                          0,
-                                                                          0,
-                                                                          0),
-                                                                  child: Text(
-                                                                    'party has ',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Visibility(
+                                                    visible:
+                                                        (listViewNotificationsRecord
+                                                                .type) ==
+                                                            ('requestTicket'),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 15, 22),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        5,
+                                                                        0),
+                                                            child:
+                                                                FFButtonWidget(
+                                                              onPressed: () {
+                                                                print(
+                                                                    'Button pressed ...');
+                                                              },
+                                                              text: 'Denny',
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 106,
+                                                                height: 35,
+                                                                color: Color(
+                                                                    0x005764FF),
+                                                                textStyle:
+                                                                    FlutterFlowTheme
                                                                         .bodyText1
                                                                         .override(
-                                                                      fontFamily:
-                                                                          'Nunito',
-                                                                      fontSize:
-                                                                          15,
-                                                                    ),
-                                                                  ),
-                                                                )
-                                                              ],
+                                                                  fontFamily:
+                                                                      'Nunito',
+                                                                  color: FlutterFlowTheme
+                                                                      .tertiaryColor,
+                                                                  fontSize: 15,
+                                                                ),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: FlutterFlowTheme
+                                                                      .violet2,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius:
+                                                                    50,
+                                                              ),
+                                                              loading:
+                                                                  _loadingButton1,
                                                             ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  'been accepted.',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .start,
-                                                                  style: FlutterFlowTheme
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5,
+                                                                        0,
+                                                                        0,
+                                                                        0),
+                                                            child: Container(
+                                                              width: 106,
+                                                              height: 35,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                gradient:
+                                                                    LinearGradient(
+                                                                  colors: [
+                                                                    FlutterFlowTheme
+                                                                        .primaryColor,
+                                                                    Color(
+                                                                        0xFF844DFF)
+                                                                  ],
+                                                                  stops: [0, 1],
+                                                                  begin:
+                                                                      AlignmentDirectional(
+                                                                          1,
+                                                                          -0.94),
+                                                                  end:
+                                                                      AlignmentDirectional(
+                                                                          -1,
+                                                                          0.94),
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100),
+                                                              ),
+                                                              child:
+                                                                  FFButtonWidget(
+                                                                onPressed: () {
+                                                                  print(
+                                                                      'Button pressed ...');
+                                                                },
+                                                                text: 'Accept',
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  width: 106,
+                                                                  height: 35,
+                                                                  color: Color(
+                                                                      0x005764FF),
+                                                                  textStyle: FlutterFlowTheme
                                                                       .bodyText1
                                                                       .override(
                                                                     fontFamily:
                                                                         'Nunito',
+                                                                    color: FlutterFlowTheme
+                                                                        .tertiaryColor,
                                                                     fontSize:
                                                                         15,
                                                                   ),
-                                                                )
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      5, 0, 0),
-                                                          child: Text(
-                                                            '5 min ago',
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .bodyText1
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Nunito',
-                                                              color: Color(
-                                                                  0xFFDBCCFE),
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w300,
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Color(
+                                                                        0x08CEB8FF),
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      50,
+                                                                ),
+                                                                loading:
+                                                                    _loadingButton2,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        )
-                                                      ],
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(100, 0, 15, 15),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                5, 0, 0, 0),
-                                                    child: Container(
-                                                      width: 140,
-                                                      height: 35,
-                                                      decoration: BoxDecoration(
-                                                        gradient:
-                                                            LinearGradient(
-                                                          colors: [
-                                                            FlutterFlowTheme
-                                                                .primaryColor,
-                                                            Color(0xFF844DFF)
-                                                          ],
-                                                          stops: [0, 1],
-                                                          begin:
-                                                              AlignmentDirectional(
-                                                                  1, -0.94),
-                                                          end:
-                                                              AlignmentDirectional(
-                                                                  -1, 0.94),
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
-                                                      ),
-                                                      child: FFButtonWidget(
-                                                        onPressed: () {
-                                                          print(
-                                                              'Button pressed ...');
-                                                        },
-                                                        text: 'Get Ticket',
-                                                        options:
-                                                            FFButtonOptions(
-                                                          width: 106,
-                                                          height: 35,
-                                                          color:
-                                                              Color(0x005764FF),
-                                                          textStyle:
-                                                              FlutterFlowTheme
-                                                                  .bodyText1
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Nunito',
-                                                            color: FlutterFlowTheme
-                                                                .tertiaryColor,
-                                                            fontSize: 15,
-                                                          ),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Color(
-                                                                0x08CEB8FF),
-                                                            width: 1,
-                                                          ),
-                                                          borderRadius: 50,
-                                                        ),
-                                                        loading:
-                                                            _loadingButton1,
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 10, 0, 0),
-                                        child: Card(
-                                          clipBehavior:
-                                              Clip.antiAliasWithSaveLayer,
-                                          color: FlutterFlowTheme.shadow,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
+                                                  Visibility(
+                                                    visible:
+                                                        (listViewNotificationsRecord
+                                                                .type) ==
+                                                            ('innerRequest'),
+                                                    child: Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
-                                                              .fromSTEB(10, 12,
-                                                                  15, 20),
-                                                      child: Container(
-                                                        width: 80,
-                                                        height: 80,
-                                                        clipBehavior:
-                                                            Clip.antiAlias,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        child: Image.asset(
-                                                          'assets/images/logan-weaver-Isle-8YpbIQ-unsplash.jpg',
-                                                          fit: BoxFit.fitWidth,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(0, 15,
-                                                                    10, 0),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              5,
-                                                                              0,
-                                                                              0),
-                                                                      child:
-                                                                          Text(
-                                                                        'You are invited to',
-                                                                        style: FlutterFlowTheme
-                                                                            .bodyText1
-                                                                            .override(
-                                                                          fontFamily:
-                                                                              'Nunito',
-                                                                          fontSize:
-                                                                              15,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              5,
-                                                                              5,
-                                                                              0,
-                                                                              0),
-                                                                      child:
-                                                                          Text(
-                                                                        'Adriana\'s',
-                                                                        style: FlutterFlowTheme
-                                                                            .bodyText1
-                                                                            .override(
-                                                                          fontFamily:
-                                                                              'Nunito',
-                                                                          fontSize:
-                                                                              15,
-                                                                        ),
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Text(
-                                                                      'inner circle event,',
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start,
-                                                                      style: FlutterFlowTheme
-                                                                          .bodyText1
-                                                                          .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Text(
-                                                                      'NYC House Party.',
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start,
-                                                                      style: FlutterFlowTheme
-                                                                          .bodyText1
-                                                                          .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        color: FlutterFlowTheme
-                                                                            .violet1,
-                                                                        fontSize:
-                                                                            15,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                )
-                                                              ],
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          5,
-                                                                          0,
-                                                                          0),
-                                                              child: Text(
-                                                                '12 min ago',
-                                                                style: FlutterFlowTheme
-                                                                    .bodyText1
-                                                                    .override(
+                                                              .fromSTEB(
+                                                                  0, 0, 15, 22),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        5,
+                                                                        0),
+                                                            child:
+                                                                FFButtonWidget(
+                                                              onPressed: () {
+                                                                print(
+                                                                    'Button pressed ...');
+                                                              },
+                                                              text: 'Denny',
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 106,
+                                                                height: 35,
+                                                                color: Color(
+                                                                    0x005764FF),
+                                                                textStyle:
+                                                                    FlutterFlowTheme
+                                                                        .bodyText1
+                                                                        .override(
                                                                   fontFamily:
                                                                       'Nunito',
-                                                                  color: Color(
-                                                                      0xFFDBCCFE),
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w300,
+                                                                  color: FlutterFlowTheme
+                                                                      .tertiaryColor,
+                                                                  fontSize: 15,
                                                                 ),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: FlutterFlowTheme
+                                                                      .violet2,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius:
+                                                                    50,
                                                               ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(100, 0, 15, 15),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5, 0, 0, 0),
-                                                      child: Container(
-                                                        width: 140,
-                                                        height: 35,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          gradient:
-                                                              LinearGradient(
-                                                            colors: [
-                                                              FlutterFlowTheme
-                                                                  .primaryColor,
-                                                              Color(0xFF844DFF)
-                                                            ],
-                                                            stops: [0, 1],
-                                                            begin:
-                                                                AlignmentDirectional(
-                                                                    1, -0.94),
-                                                            end:
-                                                                AlignmentDirectional(
-                                                                    -1, 0.94),
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      100),
-                                                        ),
-                                                        child: FFButtonWidget(
-                                                          onPressed: () {
-                                                            print(
-                                                                'Button pressed ...');
-                                                          },
-                                                          text:
-                                                              'Accept invitation',
-                                                          options:
-                                                              FFButtonOptions(
-                                                            width: 106,
-                                                            height: 35,
-                                                            color: Color(
-                                                                0x005764FF),
-                                                            textStyle:
-                                                                FlutterFlowTheme
-                                                                    .bodyText1
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Nunito',
-                                                              color: FlutterFlowTheme
-                                                                  .tertiaryColor,
-                                                              fontSize: 15,
+                                                              loading:
+                                                                  _loadingButton3,
                                                             ),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0x08CEB8FF),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius: 50,
-                                                          ),
-                                                          loading:
-                                                              _loadingButton2,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 10, 0, 0),
-                                        child: Card(
-                                          clipBehavior:
-                                              Clip.antiAliasWithSaveLayer,
-                                          color: FlutterFlowTheme.shadow,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                10, 18, 15, 20),
-                                                    child: Container(
-                                                      width: 80,
-                                                      height: 80,
-                                                      clipBehavior:
-                                                          Clip.antiAlias,
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: Image.asset(
-                                                        'assets/images/allef-vinicius-C_1jjFJioWg-unsplash.jpg',
-                                                        fit: BoxFit.fitHeight,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 8, 10, 0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            5,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'Ciera Scire',
-                                                                      style: FlutterFlowTheme
-                                                                          .bodyText1
-                                                                          .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5,
-                                                                            5,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'requests ',
-                                                                      style: FlutterFlowTheme
-                                                                          .bodyText1
-                                                                          .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Text(
-                                                                    'entry to your inner circle.',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme
-                                                                        .bodyText1
-                                                                        .override(
-                                                                      fontFamily:
-                                                                          'Nunito',
-                                                                      fontSize:
-                                                                          15,
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              )
-                                                            ],
                                                           ),
                                                           Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        0,
                                                                         5,
                                                                         0,
+                                                                        0,
                                                                         0),
-                                                            child: Text(
-                                                              '25 min ago',
-                                                              style:
-                                                                  FlutterFlowTheme
+                                                            child: Container(
+                                                              width: 106,
+                                                              height: 35,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                gradient:
+                                                                    LinearGradient(
+                                                                  colors: [
+                                                                    FlutterFlowTheme
+                                                                        .primaryColor,
+                                                                    Color(
+                                                                        0xFF844DFF)
+                                                                  ],
+                                                                  stops: [0, 1],
+                                                                  begin:
+                                                                      AlignmentDirectional(
+                                                                          1,
+                                                                          -0.94),
+                                                                  end:
+                                                                      AlignmentDirectional(
+                                                                          -1,
+                                                                          0.94),
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100),
+                                                              ),
+                                                              child:
+                                                                  FFButtonWidget(
+                                                                onPressed: () {
+                                                                  print(
+                                                                      'Button pressed ...');
+                                                                },
+                                                                text: 'Accept',
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  width: 106,
+                                                                  height: 35,
+                                                                  color: Color(
+                                                                      0x005764FF),
+                                                                  textStyle: FlutterFlowTheme
                                                                       .bodyText1
                                                                       .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                color: Color(
-                                                                    0xFFDBCCFE),
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
+                                                                    fontFamily:
+                                                                        'Nunito',
+                                                                    color: FlutterFlowTheme
+                                                                        .tertiaryColor,
+                                                                    fontSize:
+                                                                        15,
+                                                                  ),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Color(
+                                                                        0x08CEB8FF),
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      50,
+                                                                ),
+                                                                loading:
+                                                                    _loadingButton4,
                                                               ),
                                                             ),
                                                           )
@@ -842,501 +592,11 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                   )
                                                 ],
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 15, 22),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 5, 0),
-                                                      child: FFButtonWidget(
-                                                        onPressed: () {
-                                                          print(
-                                                              'Button pressed ...');
-                                                        },
-                                                        text: 'Denny',
-                                                        options:
-                                                            FFButtonOptions(
-                                                          width: 106,
-                                                          height: 35,
-                                                          color:
-                                                              Color(0x005764FF),
-                                                          textStyle:
-                                                              FlutterFlowTheme
-                                                                  .bodyText1
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Nunito',
-                                                            color: FlutterFlowTheme
-                                                                .tertiaryColor,
-                                                            fontSize: 15,
-                                                          ),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color:
-                                                                FlutterFlowTheme
-                                                                    .violet2,
-                                                            width: 1,
-                                                          ),
-                                                          borderRadius: 50,
-                                                        ),
-                                                        loading:
-                                                            _loadingButton3,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5, 0, 0, 0),
-                                                      child: Container(
-                                                        width: 106,
-                                                        height: 35,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          gradient:
-                                                              LinearGradient(
-                                                            colors: [
-                                                              FlutterFlowTheme
-                                                                  .primaryColor,
-                                                              Color(0xFF844DFF)
-                                                            ],
-                                                            stops: [0, 1],
-                                                            begin:
-                                                                AlignmentDirectional(
-                                                                    1, -0.94),
-                                                            end:
-                                                                AlignmentDirectional(
-                                                                    -1, 0.94),
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      100),
-                                                        ),
-                                                        child: FFButtonWidget(
-                                                          onPressed: () {
-                                                            print(
-                                                                'Button pressed ...');
-                                                          },
-                                                          text: 'Accept',
-                                                          options:
-                                                              FFButtonOptions(
-                                                            width: 106,
-                                                            height: 35,
-                                                            color: Color(
-                                                                0x005764FF),
-                                                            textStyle:
-                                                                FlutterFlowTheme
-                                                                    .bodyText1
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Nunito',
-                                                              color: FlutterFlowTheme
-                                                                  .tertiaryColor,
-                                                              fontSize: 15,
-                                                            ),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0x08CEB8FF),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius: 50,
-                                                          ),
-                                                          loading:
-                                                              _loadingButton4,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 10, 0, 0),
-                                        child: Card(
-                                          clipBehavior:
-                                              Clip.antiAliasWithSaveLayer,
-                                          color: FlutterFlowTheme.shadow,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                10, 20, 15, 20),
-                                                    child: Container(
-                                                      width: 80,
-                                                      height: 80,
-                                                      clipBehavior:
-                                                          Clip.antiAlias,
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: Image.asset(
-                                                        'assets/images/young-happy-blonde-girl-posing-beach-wearing-straw-hat-heart-cute-sunglasses-enjoy-her-summer-vacation-near-ocean-wearing-bikini-boho-jacket_291049-1320.jpg',
-                                                        fit: BoxFit.fitHeight,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 8, 10, 0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            5,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'Brenna Turse',
-                                                                      style: FlutterFlowTheme
-                                                                          .bodyText1
-                                                                          .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5,
-                                                                            5,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'from',
-                                                                      style: FlutterFlowTheme
-                                                                          .bodyText1
-                                                                          .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5,
-                                                                            5,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'Nicole’s',
-                                                                      style: FlutterFlowTheme
-                                                                          .bodyText1
-                                                                          .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Text(
-                                                                    'inner circle has requested to join',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme
-                                                                        .bodyText1
-                                                                        .override(
-                                                                      fontFamily:
-                                                                          'Nunito',
-                                                                      fontSize:
-                                                                          15,
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Text(
-                                                                    'your event',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme
-                                                                        .bodyText1
-                                                                        .override(
-                                                                      fontFamily:
-                                                                          'Nunito',
-                                                                      fontSize:
-                                                                          15,
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            3,
-                                                                            0,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'House Party',
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start,
-                                                                      style: FlutterFlowTheme
-                                                                          .bodyText1
-                                                                          .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        color: Color(
-                                                                            0xFFA982FF),
-                                                                        fontSize:
-                                                                            15,
-                                                                        fontWeight:
-                                                                            FontWeight.normal,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            3,
-                                                                            0,
-                                                                            0,
-                                                                            0),
-                                                                    child: Text(
-                                                                      'tonight.',
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start,
-                                                                      style: FlutterFlowTheme
-                                                                          .bodyText1
-                                                                          .override(
-                                                                        fontFamily:
-                                                                            'Nunito',
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        5,
-                                                                        0,
-                                                                        0),
-                                                            child: Text(
-                                                              '1 hour ago',
-                                                              style:
-                                                                  FlutterFlowTheme
-                                                                      .bodyText1
-                                                                      .override(
-                                                                fontFamily:
-                                                                    'Nunito',
-                                                                color: Color(
-                                                                    0xFFDBCCFE),
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 15, 22),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 5, 0),
-                                                      child: FFButtonWidget(
-                                                        onPressed: () {
-                                                          print(
-                                                              'Button pressed ...');
-                                                        },
-                                                        text: 'Denny',
-                                                        options:
-                                                            FFButtonOptions(
-                                                          width: 106,
-                                                          height: 35,
-                                                          color:
-                                                              Color(0x005764FF),
-                                                          textStyle:
-                                                              FlutterFlowTheme
-                                                                  .bodyText1
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Nunito',
-                                                            color: FlutterFlowTheme
-                                                                .tertiaryColor,
-                                                            fontSize: 15,
-                                                          ),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color:
-                                                                FlutterFlowTheme
-                                                                    .violet2,
-                                                            width: 1,
-                                                          ),
-                                                          borderRadius: 50,
-                                                        ),
-                                                        loading:
-                                                            _loadingButton5,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  5, 0, 0, 0),
-                                                      child: Container(
-                                                        width: 106,
-                                                        height: 35,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          gradient:
-                                                              LinearGradient(
-                                                            colors: [
-                                                              FlutterFlowTheme
-                                                                  .primaryColor,
-                                                              Color(0xFF844DFF)
-                                                            ],
-                                                            stops: [0, 1],
-                                                            begin:
-                                                                AlignmentDirectional(
-                                                                    1, -0.94),
-                                                            end:
-                                                                AlignmentDirectional(
-                                                                    -1, 0.94),
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      100),
-                                                        ),
-                                                        child: FFButtonWidget(
-                                                          onPressed: () {
-                                                            print(
-                                                                'Button pressed ...');
-                                                          },
-                                                          text: 'Accept',
-                                                          options:
-                                                              FFButtonOptions(
-                                                            width: 106,
-                                                            height: 35,
-                                                            color: Color(
-                                                                0x005764FF),
-                                                            textStyle:
-                                                                FlutterFlowTheme
-                                                                    .bodyText1
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Nunito',
-                                                              color: FlutterFlowTheme
-                                                                  .tertiaryColor,
-                                                              fontSize: 15,
-                                                            ),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0x08CEB8FF),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius: 50,
-                                                          ),
-                                                          loading:
-                                                              _loadingButton6,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
                                   ),
                                 )
                               ],

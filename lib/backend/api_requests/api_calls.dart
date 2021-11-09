@@ -157,14 +157,3 @@ Future<dynamic> getUserAlreadyAddedCall({
     returnResponse: true,
   );
 }
-
-Future<dynamic> testApiCall() {
-  return ApiManager.instance.makeApiCall(
-    callName: 'testApi',
-    apiUrl: 'https://reqres.in/api/products/3',
-    callType: ApiCallType.GET,
-    headers: {},
-    params: {},
-    returnResponse: true,
-  );
-}

@@ -167,7 +167,8 @@ class _ModalHosteventGuestlimitWidgetState
                             textStyle: FlutterFlowTheme.subtitle2.override(
                               fontFamily: 'Nunito',
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
                             ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
